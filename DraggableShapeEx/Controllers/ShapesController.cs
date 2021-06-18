@@ -12,15 +12,35 @@ namespace DraggableShapeEx.Controllers
     [Route("[controller]")]
     public class ShapeController : ControllerBase
     {
-        private static readonly string[] Shapes =
-        {
-            "triangle", "square", "circle", "trapezoid"
-        };
 
         [HttpGet]
-        public Array Get()
+        public IEnumerable<Shape> Get()
         {
-            return Shapes;
+            List<Shape> Shapelist = new List<Shape>();
+            Shapelist.Add(new Shape()
+            {
+                Name = "square",
+                Width = 50,
+                Height = 50,
+            });
+            Shapelist.Add(new Shape()
+            {
+                Name = "circle",
+                Width = 50,
+                Height = 50,
+                BorderRadius = 50
+            });
+            Shapelist.Add(new Shape()
+            {
+                Name = "triangle",
+                Width = 0,
+                Height = 0,
+                BorderBottom = 50,
+                BorderLeft = 25,
+                BorderRight = 25
+            });
+
+            return Shapelist.ToArray();
         }
     }
 }

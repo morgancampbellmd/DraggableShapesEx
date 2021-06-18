@@ -13,10 +13,31 @@ code {
   border-color: #1861ac;
 }
 
-.drag-wrapper {
-  width: 200px;
+
+.triangle {
+  width: 0px;
+  height: 0px;
+  border-bottom: 50px transparent solid;
+  border-left: 25px transparent solid;
+  border-right: 25px transparent solid;
   cursor: move;
-  padding: 50px;
   text-align: center;
-  background: #e5e5e5;
+  background: #0f0;
+}
+
+.square {
+  width: 50px;
+  height: 50px;
+  cursor: move;
+  text-align: center;
+  background: #00f;
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: move;
+  text-align: center;
+  background: #f00;
 }
