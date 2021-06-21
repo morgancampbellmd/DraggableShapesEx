@@ -147,7 +147,6 @@ export class DraggableShapes extends Component {
   async populateShapeList() {
     const response = await fetch("shape");
     const data = await response.json();
-    console.log(data);
     this.setState({ shapes: data, loading: false });
   }
 }

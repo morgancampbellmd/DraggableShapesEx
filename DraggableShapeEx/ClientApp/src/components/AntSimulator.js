@@ -10,13 +10,6 @@ export class AntSimulator extends Component {
     AntSimulator.updateBoardWhite = AntSimulator.updateBoardWhite.bind(this);
     AntSimulator.updateBoardBlack = AntSimulator.updateBoardBlack.bind(this);
   }
-
-  animateClockwise() {
-  }
-  
-  animateCounterclockwise() {
-    
-  }
   
   static updateBoardWhite() {
     document.getElementById("grid-" + this.state.antPositionY.toString() + this.state.antPositionX.toString()).classList.add("flipper");
@@ -33,9 +26,7 @@ export class AntSimulator extends Component {
     e.preventDefault();
     let moves = document.getElementById("moves").value;
     
-    for (var i = 0; i < moves; i++) {
-      console.log(this.state.board)
-      console.log(this.state.antPositionX + ", " + this.state.antPositionY);
+    for (let i = 0; i < moves; i++) {
       if (this.state.antDirection === 90) {
         if (this.state.board[this.state.antPositionY][this.state.antPositionX] === 1) {
           this.state.board[this.state.antPositionY][this.state.antPositionX] = 0;
@@ -116,7 +107,7 @@ export class AntSimulator extends Component {
   
   render() {
     this.state.board = Array(4).fill(1).map(row => new Array(4).fill(1));
-    console.log(this.state.board);
+    
     return (
       <div>
         <h1>Simulate K Moves</h1>
