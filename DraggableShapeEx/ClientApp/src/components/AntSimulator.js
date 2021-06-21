@@ -48,7 +48,7 @@ export class AntSimulator extends Component {
           this.state.board[this.state.antPositionY][this.state.antPositionX] = 1;
           AntSimulator.updateBoardBlack();
           this.state.antDirection = 0;
-          if(this.state.antPositionY < 0) this.state.antPositionY -= 1;
+          if(this.state.antPositionY > 0) this.state.antPositionY -= 1;
           document.getElementById("ant").style.transform = "rotate(" + this.state.antDirection.toString() + "deg)";
           document.getElementById("ant").style.top = (-150 + this.state.antPositionY * 100).toString() + "px";
         }
@@ -95,7 +95,7 @@ export class AntSimulator extends Component {
           this.state.board[this.state.antPositionY][this.state.antPositionX] = 0;
           AntSimulator.updateBoardWhite();
           this.state.antDirection = 90;
-          if(this.state.antPositionX > 0) this.state.antPositionX -= 1;
+          if(this.state.antPositionX < 3) this.state.antPositionX += 1;
           document.getElementById("ant").style.transform = "rotate(" + this.state.antDirection.toString() + "deg)";
           document.getElementById("ant").style.left = (250 + this.state.antPositionX * 100).toString() + "px";
         } 
@@ -103,7 +103,7 @@ export class AntSimulator extends Component {
           this.state.board[this.state.antPositionY][this.state.antPositionX] = 1;
           AntSimulator.updateBoardBlack();
           this.state.antDirection = 270;
-          if(this.state.antPositionX < 3) this.state.antPositionX += 1;
+          if(this.state.antPositionX > 0) this.state.antPositionX -= 1;
           document.getElementById("ant").style.transform = "rotate(" + this.state.antDirection.toString() + "deg)";
           document.getElementById("ant").style.left = (250 + this.state.antPositionX * 100).toString() + "px";
         }
@@ -122,27 +122,34 @@ export class AntSimulator extends Component {
         <h1>Simulate K Moves</h1>
 
         <p>Enter number of moves to simulate, then click 'Apply'.</p>
-          <input id="moves" type="number" defaultValue="Enter moves"></input>
-          <input id="apply" type="submit" value="Apply" onClick={this.animateKMoves}></input>
-          <div className="ant-grid-container">
-            <div className="ant-grid-item front" id="grid-00"></div>
-            <div className="ant-grid-item front" id="grid-01"></div>
-            <div className="ant-grid-item front" id="grid-02"></div>
-            <div className="ant-grid-item front" id="grid-03"></div>
-            <div className="ant-grid-item front" id="grid-10"></div>
-            <div className="ant-grid-item front" id="grid-11"></div>
-            <div className="ant-grid-item front" id="grid-12"></div>
-            <div className="ant-grid-item front" id="grid-13"></div>
-            <div className="ant-grid-item front" id="grid-20"></div>
-            <div className="ant-grid-item front" id="grid-21"></div>
-            <div className="ant-grid-item front" id="grid-22"></div>
-            <div className="ant-grid-item front" id="grid-23"></div>
-            <div className="ant-grid-item front" id="grid-30"></div>
-            <div className="ant-grid-item front" id="grid-31"></div>
-            <div className="ant-grid-item front" id="grid-32"></div>
-            <div className="ant-grid-item front" id="grid-33"></div>
-          </div>
-          <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_34175.png&f=1&nofb=1" id="ant" alt="this should be an ant"></img>
+        <input id="moves" type="number" defaultValue="Enter moves"></input>
+        <input id="apply" type="submit" value="Apply" onClick={this.animateKMoves}></input>
+        <hr></hr>
+        <label>Set Starting X Position</label>
+        <input id="xStartingPos" type="number" max="3" onChange={e => this.setState({antPositionX: e.target.value})}></input>
+        <hr></hr>
+        <label>Set Starting Y Position</label>
+        <input id="yStartingPos" type="number" max="3" onChange={e => this.setState({antPositionY: e.target.value})}></input>
+        
+        <div className="ant-grid-container">
+          <div className="ant-grid-item front" id="grid-00"></div>
+          <div className="ant-grid-item front" id="grid-01"></div>
+          <div className="ant-grid-item front" id="grid-02"></div>
+          <div className="ant-grid-item front" id="grid-03"></div>
+          <div className="ant-grid-item front" id="grid-10"></div>
+          <div className="ant-grid-item front" id="grid-11"></div>
+          <div className="ant-grid-item front" id="grid-12"></div>
+          <div className="ant-grid-item front" id="grid-13"></div>
+          <div className="ant-grid-item front" id="grid-20"></div>
+          <div className="ant-grid-item front" id="grid-21"></div>
+          <div className="ant-grid-item front" id="grid-22"></div>
+          <div className="ant-grid-item front" id="grid-23"></div>
+          <div className="ant-grid-item front" id="grid-30"></div>
+          <div className="ant-grid-item front" id="grid-31"></div>
+          <div className="ant-grid-item front" id="grid-32"></div>
+          <div className="ant-grid-item front" id="grid-33"></div>
+        </div>
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_34175.png&f=1&nofb=1" id="ant" alt="this should be an ant"></img>
       </div>
     );
   }
