@@ -13,9 +13,9 @@ code {
   border-color: #1861ac;
 }
 
-/* Draggable Shapes definitions */
+/* Draggable Shapes Definitions */
 
-#drag-wrapper {
+#drag-shape {
   position: relative;
   z-index: 1;
 }
@@ -23,22 +23,6 @@ code {
 #arr {
   position: relative;
   z-index: 1;
-}
-
-.shape-grid-container {
-  float: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  grid-template-rows:  25% 25% 25% 25%;
-}
-
-.shape-grid-item {
-  
 }
 
 .triangle {
@@ -56,6 +40,7 @@ code {
   height: 50px;
   cursor: move;
   text-align: center;
+  background: red;
 }
 
 .circle {
@@ -64,7 +49,10 @@ code {
   border-radius: 50%;
   cursor: move;
   text-align: center;
+  background: blue;
 }
+
+/* Ant Simulator Definitions */
 
 #ant {
   z-index: 3;

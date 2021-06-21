@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import Draggable from "react-draggable";
-import styled, { css } from 'styled-components';
+import $ from "jquery";
 
 export class DraggableShapes extends Component {
   static displayName = DraggableShapes.name;
@@ -27,23 +27,32 @@ export class DraggableShapes extends Component {
   
   renderShapesList(shapes) {
     
-    for(var i=0; i<shapes.length; i++) {
-      var optn = shapes[i]['name'];
-      var el = document.createElement("option");
-      el.textContent = optn;
-      el.value = optn;
-      document.getElementById('arr').appendChild(el);
+    for(let i=0; i<shapes.length; i++) {
+      let optn = shapes[i]["name"];
+      let optnExists = false;
+      $("#arr option").each(function() {
+        if($(this).text() === optn) {
+          optnExists = true;
+        }
+      })
+      if(!optnExists) {
+        let el = document.createElement("option");
+        el.textContent = optn;
+        el.value = optn;
+        document.getElementById("arr").appendChild(el);
+        this.state.currentShape = optn;
+      }
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('mousemove', this.handleMouseMove);
-    window.removeEventListener('mouseup', this.handleMouseUp);
+    window.removeEventListener("mousemove", this.handleMouseMove);
+    window.removeEventListener("mouseup", this.handleMouseUp);
   }
 
   handleMouseDown = ({ clientX, clientY }) => {
-    window.addEventListener('mousemove', this.handleMouseMove);
-    window.addEventListener('mouseup', this.handleMouseUp);
+    window.addEventListener("mousemove", this.handleMouseMove);
+    window.addEventListener("mouseup", this.handleMouseUp);
 
     if (this.props.onDragStart) {
       this.props.onDragStart();
@@ -78,14 +87,23 @@ export class DraggableShapes extends Component {
     this.setState({
       currentColor: "rgb( " + this.state.translateX / window.innerWidth * 255 + 
           ", " + this.state.translateY / window.innerHeight * 255 + 
-          ", " + (1 - (this.state.translateX / window.innerWidth + this.state.translateY / window.innerHeight)) * 255 + 
+          ", " + (1 - (this.state.translateX / window.innerWidth + this.state.translateY / window.innerHeight)/2) * 255 + 
           ")"
     });
+    
+    if(this.state.currentShape === "triangle") { 
+      document.getElementById("drag-shape").style.borderBottomColor = this.state.currentColor;
+      document.getElementById("drag-shape").style.background = "";
+    }
+    else {
+      document.getElementById("drag-shape").style.borderBottom = "";
+      document.getElementById("drag-shape").style.background = this.state.currentColor;
+    }
   };
 
   handleMouseUp = () => {
-    window.removeEventListener('mousemove', this.handleMouseMove);
-    window.removeEventListener('mouseup', this.handleMouseUp);
+    window.removeEventListener("mousemove", this.handleMouseMove);
+    window.removeEventListener("mouseup", this.handleMouseUp);
     
     this.setState(
         {
@@ -115,10 +133,11 @@ export class DraggableShapes extends Component {
           <h1 id="tabelLabel">Shapes List</h1>
           <p>This component demonstrates fetching data from the server.</p>
           {contents}
-          <select id='arr' onChange={e => this.setState({"currentShape": e.target.value})}></select>
-          <Draggable id='draggable'
+          <select id="arr" onChange={e => this.setState({"currentShape": e.target.value})}></select>
+          <Draggable id="draggable"
                      onMouseDown={this.handleMouseDown}>
-            <div id='drag-wrapper' className={this.state.currentShape} style={{background: this.state.currentColor}}></div></Draggable>
+            <div id="drag-shape" className={this.state.currentShape}></div>
+          </Draggable>
             
         </div> 
         
@@ -126,7 +145,7 @@ export class DraggableShapes extends Component {
   }
   
   async populateShapeList() {
-    const response = await fetch('shape');
+    const response = await fetch("shape");
     const data = await response.json();
     console.log(data);
     this.setState({ shapes: data, loading: false });

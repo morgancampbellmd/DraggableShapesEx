@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export class AntSimulator extends Component {
   static displayName = AntSimulator.name;
@@ -28,10 +28,11 @@ export class AntSimulator extends Component {
     document.getElementById("grid-" + this.state.antPositionY.toString() + this.state.antPositionX.toString()).classList.add("front");
     document.getElementById("grid-" + this.state.antPositionY.toString() + this.state.antPositionX.toString()).classList.remove("back");
   }
-  
+
   animateKMoves(e) {
     e.preventDefault();
     let moves = document.getElementById("moves").value;
+    
     for (var i = 0; i < moves; i++) {
       console.log(this.state.board)
       console.log(this.state.antPositionX + ", " + this.state.antPositionY);
@@ -43,7 +44,7 @@ export class AntSimulator extends Component {
           if(this.state.antPositionY < 3) this.state.antPositionY += 1;
           document.getElementById("ant").style.transform = "rotate(" + this.state.antDirection.toString() + "deg)";
           document.getElementById("ant").style.top = (-150 + this.state.antPositionY * 100).toString() + "px";
-        } 
+        }
         else {
           this.state.board[this.state.antPositionY][this.state.antPositionX] = 1;
           AntSimulator.updateBoardBlack();
@@ -52,7 +53,7 @@ export class AntSimulator extends Component {
           document.getElementById("ant").style.transform = "rotate(" + this.state.antDirection.toString() + "deg)";
           document.getElementById("ant").style.top = (-150 + this.state.antPositionY * 100).toString() + "px";
         }
-      } 
+      }
       else if (this.state.antDirection === 180) {
         if (this.state.board[this.state.antPositionY][this.state.antPositionX] === 1) {
           this.state.board[this.state.antPositionY][this.state.antPositionX] = 0;
@@ -61,7 +62,7 @@ export class AntSimulator extends Component {
           if(this.state.antPositionX > 0) this.state.antPositionX -= 1;
           document.getElementById("ant").style.transform = "rotate(" + this.state.antDirection.toString() + "deg)";
           document.getElementById("ant").style.left = (250 + this.state.antPositionX * 100).toString() + "px";
-        } 
+        }
         else {
           this.state.board[this.state.antPositionY][this.state.antPositionX] = 1;
           AntSimulator.updateBoardBlack();
@@ -70,8 +71,7 @@ export class AntSimulator extends Component {
           document.getElementById("ant").style.transform = "rotate(" + this.state.antDirection.toString() + "deg)";
           document.getElementById("ant").style.left = (250 + this.state.antPositionX * 100).toString() + "px";
         }
-
-      } 
+      }
       else if (this.state.antDirection === 270) {
         if (this.state.board[this.state.antPositionY][this.state.antPositionX] === 1) {
           this.state.board[this.state.antPositionY][this.state.antPositionX] = 0;
@@ -80,7 +80,7 @@ export class AntSimulator extends Component {
           if(this.state.antPositionY > 0) this.state.antPositionY -= 1;
           document.getElementById("ant").style.transform = "rotate(" + this.state.antDirection.toString() + "deg)";
           document.getElementById("ant").style.top = (-150 + this.state.antPositionY * 100).toString() + "px";
-        } 
+        }
         else {
           this.state.board[this.state.antPositionY][this.state.antPositionX] = 1;
           AntSimulator.updateBoardBlack();
@@ -89,7 +89,7 @@ export class AntSimulator extends Component {
           document.getElementById("ant").style.transform = "rotate(" + this.state.antDirection.toString() + "deg)";
           document.getElementById("ant").style.top = (-150 + this.state.antPositionY * 100).toString() + "px";
         }
-      } 
+      }
       else if (this.state.antDirection === 0) {
         if (this.state.board[this.state.antPositionY][this.state.antPositionX] === 1) {
           this.state.board[this.state.antPositionY][this.state.antPositionX] = 0;
@@ -98,7 +98,7 @@ export class AntSimulator extends Component {
           if(this.state.antPositionX < 3) this.state.antPositionX += 1;
           document.getElementById("ant").style.transform = "rotate(" + this.state.antDirection.toString() + "deg)";
           document.getElementById("ant").style.left = (250 + this.state.antPositionX * 100).toString() + "px";
-        } 
+        }
         else {
           this.state.board[this.state.antPositionY][this.state.antPositionX] = 1;
           AntSimulator.updateBoardBlack();
