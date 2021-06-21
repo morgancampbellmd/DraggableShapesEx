@@ -13,16 +13,42 @@ code {
   border-color: #1861ac;
 }
 
+/* Draggable Shapes definitions */
+
+#drag-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+#arr {
+  position: relative;
+  z-index: 1;
+}
+
+.shape-grid-container {
+  float: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows:  25% 25% 25% 25%;
+}
+
+.shape-grid-item {
+  
+}
 
 .triangle {
-  width: 0px;
-  height: 0px;
-  border-bottom: 50px transparent solid;
-  border-left: 25px transparent solid;
-  border-right: 25px transparent solid;
+  width: 0;
+  height: 0;
+  border-bottom: 50px solid lime;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
   cursor: move;
   text-align: center;
-  background: #0f0;
 }
 
 .square {
@@ -30,7 +56,6 @@ code {
   height: 50px;
   cursor: move;
   text-align: center;
-  background: #00f;
 }
 
 .circle {
@@ -39,5 +64,53 @@ code {
   border-radius: 50%;
   cursor: move;
   text-align: center;
-  background: #f00;
 }
+
+#ant {
+  z-index: 3;
+  height: 100px;
+  width: 100px;
+  top: -50px;
+  left: 350px;
+  float: left;
+  position: relative;
+  transform: rotate(90deg);
+  transition: transform 0.3s;
+}
+
+.ant-grid-container {
+  float: none;
+  left: 250px;
+  top: 250px;
+  position: relative;
+  display: grid;
+  height: 400px;
+  width: 400px;
+  grid-template-columns: 100px 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px 100px;
+  background-color: black;
+}
+
+.ant-grid-item {
+  perspective: 1000px;
+  backface-visibility: hidden;
+}
+
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+  background-color: white;
+}
+
+.back {
+  transform: rotateY(180deg);
+  background-color: black;
+}
+
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+
+  position: relative;
+}
+
